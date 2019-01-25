@@ -3,7 +3,7 @@
 /**
  * Class InvidiousExtension
  *
- * Latest version can be found at https://github.com/kevinpapst/freshrss-youtube
+ * Latest version can be found at https://github.com/tmiland/freshrss-invidious
  *
  * @author Kevin Papst
  */
