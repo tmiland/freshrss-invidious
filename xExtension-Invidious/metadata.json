@@ -1,0 +1,8 @@
+{
+	"name": "Invidious Video Feed",
+	"author": "Tommy Miland",
+	"description": "Embed Invidious feeds inside article content.",
+	"version": 0.1,
+	"entrypoint": "Invidious",
+	"type": "system"
+}
