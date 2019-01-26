@@ -19,6 +19,11 @@ rm -rf freshrss-invidious-master/
 
 Then switch to your browser https://localhost/FreshRSS/p/i/?c=extension and activate it.
 
+# Screenshots
+
+With activated Youtube extension:
+![screenshot after](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example.png?raw=true "After activationg the extension you can enjoy your video directly in the FreshRSS stream")
+
 ## About Invidious
 Invidious is an alternative front-end to YouTube
 https://invidio.us
