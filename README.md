@@ -19,6 +19,8 @@ rm -rf freshrss-invidious-master/
 
 Then switch to your browser https://localhost/FreshRSS/p/i/?c=extension and activate it.
 
+Set "Player domain" in settings.
+
 # Screenshots
 
 With FreshRSS and an original Invidios Channel feed:
