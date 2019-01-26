@@ -21,6 +21,9 @@ Then switch to your browser https://localhost/FreshRSS/p/i/?c=extension and acti
 
 # Screenshots
 
+With FreshRSS and an original Invidios Channel feed:
+![screenshot before](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example2.png?raw=true "Without this extension the video is not shown")
+
 With activated Invidios extension:
 ![screenshot after](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example.png?raw=true "After activationg the extension you can enjoy your video directly in the FreshRSS stream")
 
