@@ -2,6 +2,14 @@
 <form action="<?php echo _url('extension', 'configure', 'e', urlencode($this->getName())); ?>" method="post">
 	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 	<div class="form-group">
+		<p>
+			Note: Use domain without http(s):// and no forward slash / E.g "sub.domain.com".<br />
+			PS: Must match domain of the RSS Feed from the Invidious instance.
+		</p>
+		<label class="group-name" for="in_domain"><?php echo _t('ext.in_videos.domain'); ?></label>
+		<div class="group-controls">
+			<input type="text" id="in_domain" name="in_domain" value="<?php echo FreshRSS_Context::$user_conf->in_player_domain; ?>" required pattern="^([a-z0-9-]+\.)*([a-z0-9]+)(\.[a-z]+){1,3}$">
+		</div>
 
 		<label class="group-name" for="in_height"><?php echo _t('ext.in_videos.height'); ?></label>
 		<div class="group-controls">
