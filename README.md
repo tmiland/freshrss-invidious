@@ -21,7 +21,7 @@ Then switch to your browser https://localhost/FreshRSS/p/i/?c=extension and acti
 
 # Screenshots
 
-With activated Youtube extension:
+With activated Invidios extension:
 ![screenshot after](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example.png?raw=true "After activationg the extension you can enjoy your video directly in the FreshRSS stream")
 
 ## About Invidious
