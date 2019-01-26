@@ -1,4 +1,4 @@
-# FreshRSS - invidious video extension
+# FreshRSS - Invidious video extension
 
 This FreshRSS extension allows you to directly watch Invidios videos from within subscribed channel feeds.
 
