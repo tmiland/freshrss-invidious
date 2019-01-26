@@ -5,10 +5,15 @@
  *
  * Latest version can be found at https://github.com/tmiland/freshrss-invidious
  *
- * @author Kevin Papst
+ * @author Tommy Miland
  */
 class InvidiousExtension extends Minz_Extension
 {
+    /**
+     * Video player domain
+     * @var string
+     */
+    protected $domain = 'invidio.us';
     /**
      * Video player width
      * @var int
@@ -33,7 +38,6 @@ class InvidiousExtension extends Minz_Extension
         $this->registerHook('entry_before_display', array($this, 'embedInvidiousVideo'));
         $this->registerTranslates();
     }
-
     /**
      * Initializes the extension configuration, if the user context is available.
      * Do not call that in your extensions init() method, it can't be used there.
@@ -43,7 +47,9 @@ class InvidiousExtension extends Minz_Extension
         if (!class_exists('FreshRSS_Context', false) || null === FreshRSS_Context::$user_conf) {
             return;
         }
-
+        if (FreshRSS_Context::$user_conf->in_player_domain != '') {
+            $this->domain = FreshRSS_Context::$user_conf->in_player_domain;
+        }
         if (FreshRSS_Context::$user_conf->in_player_width != '') {
             $this->width = FreshRSS_Context::$user_conf->in_player_width;
         }
@@ -54,7 +60,16 @@ class InvidiousExtension extends Minz_Extension
             $this->showContent = (bool)FreshRSS_Context::$user_conf->in_show_content;
         }
     }
-
+    /**
+     * Returns domain name for the Invidious player iframe.
+     * You have to call loadConfigValues() before this one, otherwise you get default values.
+     *
+     * @return string
+     */
+    public function getDomain()
+    {
+        return $this->domain;
+    }
     /**
      * Returns the width in pixel for the Invidious player iframe.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
@@ -65,7 +80,6 @@ class InvidiousExtension extends Minz_Extension
     {
         return $this->width;
     }
-
     /**
      * Returns the height in pixel for the Invidious player iframe.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
@@ -76,7 +90,6 @@ class InvidiousExtension extends Minz_Extension
     {
         return $this->height;
     }
-
     /**
      * Returns whether this extensions displays the content of the Invidious feed.
      * You have to call loadConfigValues() before this one, otherwise you get default values.
@@ -87,7 +100,6 @@ class InvidiousExtension extends Minz_Extension
     {
         return $this->showContent;
     }
-
     /**
      * Inserts the Invidious video iframe into the content of an entry, if the entries link points to a Invidious watch URL.
      *
@@ -98,16 +110,12 @@ class InvidiousExtension extends Minz_Extension
     {
         $link = $entry->link();
 
-        if (preg_match('#^https?://invidio\.us/watch\?v=|/videos/watch/[0-9a-f-]{36}$#', $link) !== 1) {
-            return $entry;
-        }
-
         $this->loadConfigValues();
 
         if (stripos($entry->content(), '<iframe class="invidious-plugin-video"') !== false) {
             return $entry;
         }
-        if (stripos($link, 'invidio.us/watch?v=') !== false) {
+        if (stripos($link, ''.$this->domain.'/watch?v=') !== false) {
             $html = $this->getIFrameForLink($link);
         }
         if ($this->showContent) {
@@ -118,25 +126,21 @@ class InvidiousExtension extends Minz_Extension
 
         return $entry;
     }
-
     /**
-     * Returns an HTML <iframe> for a given Invidious watch URL (www.invidio.us/watch?v=)
+     * Returns an HTML <iframe> for a given Invidious watch URL (invidio.us/watch?v=)
      *
      * @param string $link
      * @return string
      */
     public function getIFrameForLink($link)
     {
-        $domain = 'invidio.us';
-
-        $url = str_replace('//invidio.us/watch?v=', '//'.$domain.'/embed/', $link);
+        $url = str_replace('//'.$this->domain.'/watch?v=', '//'.$this->domain.'/embed/', $link);
         $url = str_replace('http://', 'https://', $url);
 
         $html = $this->getIFrameHtml($url);
 
         return $html;
     }
-
     /**
      * Returns an HTML <iframe> for a given URL for the configured width and height.
      *
@@ -153,7 +157,6 @@ class InvidiousExtension extends Minz_Extension
                 frameborder="0"
                 allowfullscreen></iframe>';
     }
-
     /**
      * Saves the user settings for this extension.
      */
@@ -162,6 +165,7 @@ class InvidiousExtension extends Minz_Extension
         $this->loadConfigValues();
 
         if (Minz_Request::isPost()) {
+            FreshRSS_Context::$user_conf->in_player_domain = (string)Minz_Request::param('in_domain', '');
             FreshRSS_Context::$user_conf->in_player_height = (int)Minz_Request::param('in_height', '');
             FreshRSS_Context::$user_conf->in_player_width = (int)Minz_Request::param('in_width', '');
             FreshRSS_Context::$user_conf->in_show_content = (int)Minz_Request::param('in_show_content', 0);
