@@ -108,6 +108,7 @@ class InvidiousExtension extends Minz_Extension
      */
     public function embedInvidiousVideo($entry)
     {
+        $html = $_POST['html'] ?? ''; // Fix for "PHP Notice: Undefined variable: html" Ref: https://stackoverflow.com/a/4261200
         $link = $entry->link();
 
         $this->loadConfigValues();
