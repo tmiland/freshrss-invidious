@@ -1,10 +1,10 @@
 # FreshRSS - Invidious video extension
 
-This FreshRSS extension allows you to directly watch Invidios videos from within subscribed channel feeds.
+This FreshRSS extension allows you to directly watch Invidious videos from within subscribed channel feeds.
 
 
 
-To use it, upload the ```xExtension-Invidios``` directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
+To use it, upload the ```xExtension-Invidious``` directory to the FreshRSS `./extensions` directory on your server and enable it on the extension panel in FreshRSS.
 
 ## Installation
 
@@ -13,7 +13,7 @@ The first step is to put the extension into your FreshRSS extension directory:
 cd /var/www/FreshRSS/extensions/
 wget https://github.com/tmiland/freshrss-invidious/archive/master.zip
 unzip master.zip
-mv freshrss-invidious-master/xExtension-Invidios .
+mv freshrss-invidious-master/xExtension-Invidious .
 rm -rf freshrss-invidious-master/
 ```
 
@@ -23,10 +23,10 @@ Set "Player domain" in settings.
 
 # Screenshots
 
-With FreshRSS and an original Invidios Channel feed:
+With FreshRSS and an original Invidious Channel feed:
 ![screenshot before](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example2.png?raw=true "Without this extension the video is not shown")
 
-With activated Invidios extension:
+With activated Invidious extension:
 ![screenshot after](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example.png?raw=true "After activationg the extension you can enjoy your video directly in the FreshRSS stream")
 
 ## About Invidious
