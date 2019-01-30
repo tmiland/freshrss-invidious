@@ -24,12 +24,15 @@ Set "Player domain" in settings.
 # Screenshots
 
 Setting in FreshRSS:
+
 ![screenshot settings](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/settings.png?raw=true "Custom option to set the domain of your own instance, player height/width and option to redirect YouTube videos to Invidious")
 
 With FreshRSS and an original Invidious Channel feed:
+
 ![screenshot before](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example2.png?raw=true "Without this extension the video is not shown")
 
 With activated Invidious extension:
+
 ![screenshot after](https://raw.githubusercontent.com/tmiland/freshrss-invidious/master/example.png?raw=true "After activationg the extension you can enjoy your video directly in the FreshRSS stream")
 
 ## About Invidious
