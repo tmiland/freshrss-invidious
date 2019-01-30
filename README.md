@@ -41,5 +41,9 @@ More extensions can be found at [FreshRSS/Extensions](https://github.com/FreshRS
 
 ## Changelog
 
+0.2:
+* Added option to redirect YouTube videos to Invidious
+* Moved note to language file
+
 0.1:
 * Forked and customized for Invidious from https://github.com/kevinpapst/freshrss-youtube

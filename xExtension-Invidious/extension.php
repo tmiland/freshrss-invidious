@@ -29,7 +29,11 @@ class InvidiousExtension extends Minz_Extension
      * @var bool
      */
     protected $showContent = false;
-
+    /**
+     * Switch to redirect Youtube to Invidious
+     * @var bool
+     */
+    protected $redirectYouTube = false;
     /**
      * Initialize this extension
      */
@@ -55,6 +59,9 @@ class InvidiousExtension extends Minz_Extension
         }
         if (FreshRSS_Context::$user_conf->in_player_height != '') {
             $this->height = FreshRSS_Context::$user_conf->in_player_height;
+        }
+        if (FreshRSS_Context::$user_conf->in_yt_redirect != '') {
+            $this->redirectYouTube = (bool)FreshRSS_Context::$user_conf->in_yt_redirect;
         }
         if (FreshRSS_Context::$user_conf->in_show_content != '') {
             $this->showContent = (bool)FreshRSS_Context::$user_conf->in_show_content;
@@ -119,6 +126,9 @@ class InvidiousExtension extends Minz_Extension
         if (stripos($link, ''.$this->domain.'/watch?v=') !== false) {
             $html = $this->getIFrameForLink($link);
         }
+        if (stripos($link, 'www.youtube.com/watch?v=') !== false && ($this->redirectYouTube)) { //YouTube
+            $html = $this->getYouTubeIFrameForLink($link);
+        }
         if ($this->showContent) {
             $html .= $entry->content();
         }
@@ -135,12 +145,29 @@ class InvidiousExtension extends Minz_Extension
      */
     public function getIFrameForLink($link)
     {
+
         $url = str_replace('//'.$this->domain.'/watch?v=', '//'.$this->domain.'/embed/', $link);
         $url = str_replace('http://', 'https://', $url);
 
         $html = $this->getIFrameHtml($url);
 
         return $html;
+    }
+    /**
+    * Returns an HTML <iframe> for a given YouTube watch URL
+    *
+    * @param string $link
+    * @return string
+    */
+    public function getYouTubeIFrameForLink($link)
+    {
+
+      $url = str_replace('//www.youtube.com/watch?v=', '//'.$this->domain.'/embed/', $link);
+      $url = str_replace('http://', 'https://', $url);
+
+      $html = $this->getIFrameHtml($url);
+
+      return $html;
     }
     /**
      * Returns an HTML <iframe> for a given URL for the configured width and height.
@@ -170,6 +197,7 @@ class InvidiousExtension extends Minz_Extension
             FreshRSS_Context::$user_conf->in_player_height = (int)Minz_Request::param('in_height', '');
             FreshRSS_Context::$user_conf->in_player_width = (int)Minz_Request::param('in_width', '');
             FreshRSS_Context::$user_conf->in_show_content = (int)Minz_Request::param('in_show_content', 0);
+            FreshRSS_Context::$user_conf->in_yt_redirect = (int)Minz_Request::param('in_yt_redirect', 0);
             FreshRSS_Context::$user_conf->save();
         }
     }

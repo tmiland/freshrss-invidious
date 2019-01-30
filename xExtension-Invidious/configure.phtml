@@ -3,8 +3,7 @@
 	<input type="hidden" name="_csrf" value="<?php echo FreshRSS_Auth::csrfToken(); ?>" />
 	<div class="form-group">
 		<p>
-			Note: Use domain without http(s):// and no forward slash / E.g "sub.domain.com".<br />
-			PS: Must match domain of the RSS Feed from the Invidious instance.
+			<?php echo _t('ext.in_videos.notes'); ?>
 		</p>
 		<label class="group-name" for="in_domain"><?php echo _t('ext.in_videos.domain'); ?></label>
 		<div class="group-controls">
@@ -19,6 +18,11 @@
 		<label class="group-name" for="in_width"><?php echo _t('ext.in_videos.width'); ?></label>
 		<div class="group-controls">
 			<input type="number" id="in_width" name="in_width" value="<?php echo FreshRSS_Context::$user_conf->in_player_width; ?>" min="100" data-leave-validation="1">
+		</div>
+
+		<label class="group-name" for="in_yt_redirect"><?php echo _t('ext.in_videos.redirect_youtube'); ?></label>
+		<div class="group-controls">
+			<input type="checkbox" id="in_yt_redirect" name="in_yt_redirect" value="1" <?php if (FreshRSS_Context::$user_conf->in_yt_redirect != '') { echo 'checked'; }; ?>>
 		</div>
 
 		<label class="group-name" for="in_show_content"><?php echo _t('ext.in_videos.show_content'); ?></label>

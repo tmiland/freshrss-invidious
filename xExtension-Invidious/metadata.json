@@ -2,7 +2,7 @@
 	"name": "Invidious Video Feed",
 	"author": "Tommy Miland",
 	"description": "Embed Invidious feeds inside article content.",
-	"version": 0.1,
+	"version": 0.2,
 	"entrypoint": "Invidious",
 	"type": "system"
 }
